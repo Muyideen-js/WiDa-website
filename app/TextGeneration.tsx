@@ -10,6 +10,6 @@ const words = `  Dive into our comprehensive suite of tools designed to help you
 `;
 
 export function TextGenerateEffectDemo() {
-  return <TextGenerateEffect duration={2} filter={false} words={words} className="text-xm font-medium" />;
+  return <TextGenerateEffect duration={2} filter={false} words={words} className="text-xm font-medium text-white" />;
 }
 
