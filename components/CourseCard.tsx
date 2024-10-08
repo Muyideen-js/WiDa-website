@@ -7,22 +7,22 @@ import Button from "./ui/Button";
 
 export const CourseCard = () => {
   return (
-    <div className="mx-20 my-10 pt-10">
-      <h1 className="text-center font-extrabold text-3xl mb-10 text-white">
+    <div className="mx-5 md:mx-20 my-10 pt-10">
+      <h1 className="text-center font-extrabold text-2xl md:text-3xl mb-10 text-white">
         Courses
       </h1>
 
       {/* First Course Section */}
-      <div className="flex flex-col sm:flex-row gap-x-[70px]">
-        <div className="w-full sm:w-1/2 h-80 rounded-md overflow-hidden flex items-center justify-center">
+      <div className="flex flex-col md:flex-row gap-y-5 md:gap-x-[70px]">
+        <div className="w-full md:w-1/2 h-64 md:h-80 rounded-md overflow-hidden flex items-center justify-center">
           <Image src={ImageOne} alt="Lesson Image" className="object-cover w-full h-full" />
         </div>
-        <div className="w-full sm:w-1/2 sm:ml-5 mt-5 sm:mt-0 text-white">
-          <h3 className="text-xl font-bold">Data Science</h3>
-          <h4 className="text-lg font-semibold mb-2">Beginners - Intermediate</h4>
+        <div className="w-full md:w-1/2 mt-5 md:mt-0 text-white">
+          <h3 className="text-lg md:text-xl font-bold">Data Science</h3>
+          <h4 className="text-base md:text-lg font-semibold mb-2">Beginners - Intermediate</h4>
           <ul className="mb-2">
             <li>Virtual - ₦100,000 | ₦80,000</li>
-            <li>Physical- ₦150,000 | ₦100,000</li>
+            <li>Physical - ₦150,000 | ₦100,000</li>
           </ul>
           <p className="mb-2">The course covers a wide range of topics, including:</p>
           <ul className="mb-2 list-disc list-inside">
@@ -38,21 +38,20 @@ export const CourseCard = () => {
         </div>
       </div>
 
-      {/* Third Course Section */}
-      <div className="flex mt-20 flex-row-reverse gap-x-[70px]">
-        <div className="w-full sm:w-1/2 h-80 rounded-md overflow-hidden flex items-center justify-center">
+      {/* Second Course Section */}
+      <div className="flex mt-10 md:mt-20 flex-col  gap-y-5 md:flex-row-reverse md:gap-x-[70px]">
+        <div className="w-full md:w-1/2 h-64 md:h-80 rounded-md overflow-hidden flex items-center justify-center">
           <Image src={ImageTwo} alt="Lesson Image" className="object-cover w-full h-full" />
         </div>
-        <div className="w-full sm:w-1/2 sm:ml-5 mt-5 sm:mt-0 text-white">
-          <h3 className="text-xl font-bold">Research Analysis</h3>
-          {/* <h4 className="text-lg font-semibold mb-2">Beginners - Intermediate</h4> */}
+        <div className="w-full md:w-1/2 mt-5 md:mt-0 text-white">
+          <h3 className="text-lg md:text-xl font-bold">Research Analysis</h3>
           <ul className="mb-2">
             <li>Virtual - ₦80,000 | ₦50,000</li>
-            <li>Physical- ₦100,000 | ₦80,000</li>
+            <li>Physical - ₦100,000 | ₦80,000</li>
           </ul>
-          <p className="mb-2">This course helps to gain practical understanding of Data Analytics topics in this course includes:</p>
+          <p className="mb-2">This course helps to gain practical understanding of Data Analytics topics, including:</p>
           <ul className="mb-2 list-disc list-inside">
-          <li>Introduction to SPSS</li>
+            <li>Introduction to SPSS</li>
             <li>Introduction to R</li>
             <li>Statistical analysis with Excel</li>
           </ul>
@@ -62,20 +61,20 @@ export const CourseCard = () => {
         </div>
       </div>
 
-      <div className="flex mt-20 flex-col sm:flex-row gap-x-[70px]">
-        <div className="w-full sm:w-1/2 h-80 rounded-md overflow-hidden flex items-center justify-center">
+      {/* Third Course Section */}
+      <div className="flex mt-10 md:mt-20 flex-col md:flex-row gap-y-5 md:gap-x-[70px]">
+        <div className="w-full md:w-1/2 h-64 md:h-80 rounded-md overflow-hidden flex items-center justify-center">
           <Image src={ImageThree} alt="Lesson Image" className="object-cover w-full h-full" />
         </div>
-        <div className="w-full sm:w-1/2 sm:ml-5 mt-5 sm:mt-0 text-white">
-          <h3 className="text-xl font-bold">Data Analytics</h3>
-          {/* <h4 className="text-lg font-semibold mb-2">Beginners - Intermediate</h4> */}
+        <div className="w-full md:w-1/2 mt-5 md:mt-0 text-white">
+          <h3 className="text-lg md:text-xl font-bold">Data Analytics</h3>
           <ul className="mb-2">
             <li>Virtual - ₦80,000 | ₦50,000</li>
-            <li>Physical- ₦100,000 | ₦80,000</li>
+            <li>Physical - ₦100,000 | ₦80,000</li>
           </ul>
-          <p className="mb-2">This course helps to gain practical understanding of Data Analytics topics in this course includes:</p>
+          <p className="mb-2">This course helps to gain practical understanding of Data Analytics topics, including:</p>
           <ul className="mb-2 list-disc list-inside">
-          <li>Data Analytics with Microsoft Excel</li>
+            <li>Data Analytics with Microsoft Excel</li>
             <li>Data Analytics with SQL</li>
             <li>Data Analytics with PowerBI</li>
             <li>ETL and resume building</li>
@@ -85,7 +84,6 @@ export const CourseCard = () => {
           </a>
         </div>
       </div>
-
     </div>
   );
 };
