@@ -2,10 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
-import { Canvas, extend, Object3DNode, useThree } from "@react-three/fiber";
+import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import countries from "@/data/globe.json";
-
 declare module "@react-three/fiber" {
   interface ThreeElements {
     threeGlobe: Object3DNode<ThreeGlobe, typeof ThreeGlobe>;
@@ -86,7 +85,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     emissiveIntensity: 0.1,
     shininess: 0.9,
     arcTime: 2000,
-    arcLength: 9,
+    arcLength: 0.9,
     rings: 1,
     maxRings: 3,
     ...globeConfig,
@@ -158,7 +157,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         .showAtmosphere(defaultProps.showAtmosphere)
         .atmosphereColor(defaultProps.atmosphereColor)
         .atmosphereAltitude(defaultProps.atmosphereAltitude)
-        .hexPolygonColor(() => {
+        .hexPolygonColor((e) => {
           return defaultProps.polygonColor;
         });
       startAnimation();
@@ -178,13 +177,13 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .arcAltitude((e) => {
         return (e as { arcAlt: number }).arcAlt * 1;
       })
-      .arcStroke(() => {
+      .arcStroke((e) => {
         return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
       })
       .arcDashLength(defaultProps.arcLength)
       .arcDashInitialGap((e) => (e as { order: number }).order * 1)
       .arcDashGap(15)
-      .arcDashAnimateTime(() => defaultProps.arcTime);
+      .arcDashAnimateTime((e) => defaultProps.arcTime);
 
     globeRef.current
       .pointsData(data)
@@ -199,8 +198,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) /
-          defaultProps.rings
+        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
       );
   };
 
@@ -225,7 +223,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
     };
   }, [globeRef.current, globeData]);
 
-  return <threeGlobe ref={globeRef} />;
+  return (
+    <>
+      <threeGlobe ref={globeRef} />
+    </>
+  );
 }
 
 export function WebGLRendererConfig() {
@@ -235,7 +237,7 @@ export function WebGLRendererConfig() {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, [gl, size]);
+  }, []);
 
   return null;
 }
@@ -244,7 +246,6 @@ export function World(props: WorldProps) {
   const { globeConfig } = props;
   const scene = new Scene();
   scene.fog = new Fog(0xffffff, 400, 2000);
-
   return (
     <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
@@ -264,25 +265,20 @@ export function World(props: WorldProps) {
       />
       <Globe {...props} />
       <OrbitControls
-        enableDamping
-        enableZoom
-        autoRotate={globeConfig.autoRotate}
-        autoRotateSpeed={globeConfig.autoRotateSpeed}
+        enablePan={false}
+        enableZoom={false}
+        minDistance={cameraZ}
+        maxDistance={cameraZ}
+        autoRotateSpeed={1}
+        autoRotate={true}
+        minPolarAngle={Math.PI / 3.5}
+        maxPolarAngle={Math.PI - Math.PI / 3}
       />
     </Canvas>
   );
 }
 
-function genRandomNumbers(min: number, max: number, n: number) {
-  let arr = [];
-  while (arr.length < n) {
-    let random = Math.floor(Math.random() * (max - min + 1)) + min;
-    if (!arr.includes(random)) arr.push(random);
-  }
-  return arr;
-}
-
-function hexToRgb(hex: string) {
+export function hexToRgb(hex: string) {
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
@@ -296,4 +292,14 @@ function hexToRgb(hex: string) {
         b: parseInt(result[3], 16),
       }
     : null;
+}
+
+export function genRandomNumbers(min: number, max: number, count: number) {
+  const arr = [];
+  while (arr.length < count) {
+    const r = Math.floor(Math.random() * (max - min)) + min;
+    if (arr.indexOf(r) === -1) arr.push(r);
+  }
+
+  return arr;
 }

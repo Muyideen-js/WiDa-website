@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FloatingNavDemo } from "./nav";
-import { GlobeDemo } from "./Globe";
+// import { GlobeDemo } from "./Globe";
 import { TextGenerateEffectDemo } from "./TextGeneration";
 import Button from "../components/ui/Button";
 import { TracingBeam } from "../components/ui/TracingBeam";
@@ -31,7 +31,7 @@ import Insta from "../public/instagram.svg";
         </div>
         <div className="hidden  md:flex-1 md:flex justify-center md:mt-[-50px] mt-5 w-full h-full">
           <div className="w-full h-full">
-            <GlobeDemo />
+          {/* <GlobeDemo /> */}
           </div>
         </div>
       </div>
